@@ -145,7 +145,7 @@ class Dataset():
     def load_arthritis(self, opts=None):
         columns = [
             # TARGET: systolic BP average
-            FeatureColumn('Questionnaire', 'MCQ160A', 
+            FeatureColumn('Questionnaire', 'MCQ220', 
                                     None, None),
             # Gender
             FeatureColumn('Demographics', 'RIAGENDR', 
@@ -222,16 +222,16 @@ class Dataset():
         ]
         nhanes_dataset = NHANES(self.data_path, columns)
         df = nhanes_dataset.process()
-        fe_cols = df.drop(['MCQ160A'], axis=1)
+        fe_cols = df.drop(['MCQ220'], axis=1)
         features = fe_cols.values
-        target = df['MCQ160A'].values
+        target = df['MCQ220'].values
         # remove nan labeled samples
         inds_valid = ~ np.isnan(target)
         features = features[inds_valid]
         target = target[inds_valid]
 
         # Put each person in the corresponding bin
-        targets = np.zeros(target.shape[0])
+        targets = np.full((target.shape[0]), 3)
         targets[target == 1] = 0 # yes arthritis
         targets[target == 2] = 1 # no arthritis
 
