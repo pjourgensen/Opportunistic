@@ -1,38 +1,55 @@
-# CS205 Final Project - Spring 2019
+# NHANES Analysis
 
-## The Task:
-In this project we will try and build a predicitve model to predict being positive to cancer or malignancy.
-- Using the features available at [CDC NHANES](https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?BeginYear=2015), investigate what features you would like to use in your model. 
-- Under the tab "Data, Documentation, Codebooks, SAS Code" choose one of the categories: "Demographics Data", "Dietary Data", "Examination Data", "Laboratory Data", or "Questionnaire Data". 
-- For each of these categories there is a list of sub-categories available. Clicking the "Doc File" link will provide the information about features in that sub-category and feature names.
-- Using these features, construct a predictive model that will be able to predict having cancer or malignancy.
+#### -- Project Status: [On Hold]
 
-**Example finding feature**: Our target of focus (cancer or malignancy) is found under Questionnaire Data -> Medical Conditions -> MCQ220 - Ever told you had cancer or malignancy. Under this question the variable name **MCQ220** is what we will use as an identifier in our code.
+## Intro/Objective
+The purpose of this project is to develop a cancer classification and risk prediction model in the hopes of providing advance warning to patients at risk for cancer.  Every year, the National Health and Nurtitional Examination Survey (NHANES) gathers patient data detailing symptoms, demographic information, family history, diet, lab results, and comorbidities (among other considerations). This data is made available to allow the general public to analyze and develop models based on the responses. The main difficulty lies within the quality of the data as many of the responses are missing. In this project, I present an analysis of feature selection and engineering before developing an object-oriented pipeline that allows for seamless trials of parameterizations. Ultimately, a gradient-boosted decision tree model performed optimally, achieving a 24.2% recall on a heldout test set. I believe there is still room for improvement in the feature selection and preprocessing steps, so this project remains [On Hold] until the opportunity to continue arises.
 
-**Tip**: If you are looking for a feature, another option is to google "NHANES \<feature name\>". This is effective if you have a feature in mind but don't want to go over all possible categories to find it.
+### Methods Used
+* Object-Oriented Programming
+* Pipelining
+* Inferential Statistics
+* Missing Value Imputation, Categorical Encoding
+* Feature Selection, Filtering
+* Decision Trees, SVMs
+* Ensemble Methods, Boosting
+* Data Visualization
+* Predictive Modeling
+* Model Persistance
 
-**Important**: When selecting features to process, remember to input the correct category where the feature can be found, so that the processing code can find it.
-  
-### What you are scored on
-The grade for this task will be seperated into 3 categories
-- **Feature selection, and evaluation**. You will be required to explain why certain features were incorporated. empiric evaluation (e.g: mutual information) or a logical explanation for a group of features (e.g: age, geneder are included as demographics, as certain types of cancer affect certain demographics with higher probability. As can be seen [here](https://gis.cdc.gov/Cancer/USCS/DataViz.html)).
-- **Preprocessing and feature engineering**. Writing your own preprocessing code, explain why you chose a specific imputation technique, or changed the features in a certain way. You can support you argument with previous research done on the topic or with your own experimentation.
-- **Predictive modeling**. Build an ML model to predict having cancer. Construct a model to fit the data, explain why the chosen model was selected, describe experiments done with the model (e.g: hyper parameter tuning).
+### Technologies
+* Python, jupyter
+* Pandas, Numpy
+* SKLearn
+* Tensorflow
+* Seaborn, Matplotlib
+* joblib
 
-### How you are scored
-The grade will be given based on the quality, supported arguments, and clarity of evaluation of each of the 3 parts.
-Each part is equal 33.3333...% of your final project grade. Bonus points for originality and "out of the box" thinking for approaching each of these 3 parts.
+## Project Description
+* Data  
+   * 50,000 patients with over 500 possible survey responses
+   * Roughly 9% are positive for having cancer at some point in their lives
+   * Requires substantial hand-selection and preprocessing
+* Feature Selection
+   * Began with a correlational filter to remove highly correlated features 
+   * Passed data through mutual information filter to identify subset with some relationship to the target class
+   * Finally passed data through variance filter to remove features with minimal variance
+   * Lasso regression and tree-based methods were also tested, but resulted in declines in model performance
+* Performance Metric
+   * Chose 5-fold cross-validation on balanced training set to assess overall accuracy
+* Predictive Modeling
+   * Ran parameter tuning grid searches over Decision Trees, SVMs, Random Forests, GBDTs, and Neural Networks
+   * Found that an optimized GBDT delivered an accuracy of 76.5% and recall of 24.2%
 
+## Getting Started
 
-## File list:
-- **nhanes.py:** implementation of the data preprocessing logic as well as definition an example dataset.
-- **Demo_Dataset.ipynb:** Jupyter notebook file to demonstrate the basic usage of sample dataset.
+1. Clone this repo.
+2. Download Raw Data from [here](https://drive.google.com/file/d/1hFp7O747408D8t5442f0Sjit7wXKXI1z/view?usp=sharing).    
+3. Download the requirements.
+4. Edit sample_config to your preferences.
+5. Edit config_outpath, config_inpath, and joblib_outpath with NhanesModelManager
+6. Run NhanesModelManager
 
-## How to use:
-1) Download [raw data files](https://drive.google.com/file/d/1hFp7O747408D8t5442f0Sjit7wXKXI1z/view?usp=sharing) and decompress them.
-2) Install Python 3 and the following packages: joblib, numpy, pandas, matplotlib, scipy, sklearn, jupyter, pytorch.
-3) Use Demo_Dataset.ipynb to see an example on how to use the predefined task.
-4) Expand nhanes.py to define new tasks by following the implementation logic of the provided sample.
+## For more detail and discussion:
+* [Blog Post](https://pjourgensen.github.io/nhanes.html)
 
-
-##### For a detailed explanation of the methods used here for the cost-sensetive health dataset, please refer to: ["Nutrition and Health Data for Cost-Sensitive Learning"](https://arxiv.org/abs/1902.07102)
