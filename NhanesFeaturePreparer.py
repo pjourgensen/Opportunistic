@@ -15,7 +15,6 @@ class NhanesFeaturePreparer:
              config = json.load(f)
          if training:
              self.DATA_PATH = config['DATA_PATH']
-             self.DATASET = config['DATASET']
              self.SEED = config['SEED']
              self.TEST_SIZE = config['TEST_SIZE']
              self.TRAIN_SIZE = config['TRAIN_SIZE']
