@@ -47,7 +47,7 @@ The purpose of this project is to develop a cancer classification and risk predi
 2. Download Raw Data from [here](https://drive.google.com/file/d/1hFp7O747408D8t5442f0Sjit7wXKXI1z/view?usp=sharing).    
 3. Download the requirements.
 4. Edit sample_config to your preferences.
-5. Edit config_outpath, config_inpath, and joblib_outpath with NhanesModelManager
+5. Edit config_outpath, config_inpath, and joblib_outpath within NhanesModelManager
 6. Run NhanesModelManager
 
 ## For more detail and discussion:
