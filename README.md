@@ -15,7 +15,7 @@ The purpose of this project is to develop a cancer classification and risk predi
 * Ensemble Methods, Boosting
 * Data Visualization
 * Predictive Modeling
-* Model Persistance
+* Model Persistence
 
 ### Technologies
 * Python, jupyter
